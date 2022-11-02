@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-class HideLineClass
+public class LineClass
 {
     [SerializeField]
     string LineName;
-    public List<Point> HidePoint;
+    public List<Point> Points;
 
-    public HideLineClass(string lineName)
+    public LineClass(string lineName)
     {
         LineName = lineName;
     }
@@ -17,31 +17,29 @@ class HideLineClass
 
 public class Board : MonoBehaviour
 {
+    public static Board Instance;
+
     [SerializeField]
     Transform BasicLines;
-    [SerializeField]
-    List<Point> BasicLine;
+
+    public List<LineClass> BasicLine;
+
     [SerializeField]
     Transform HideLines;
-    [SerializeField]
-    List<HideLineClass> HideLine;
-    [SerializeField]
-    Point MiddlePoint;
+
+    public List<LineClass> HideLine;
+    public Point MiddlePoint;
 
     private void Awake()
     {
+        Instance = this;
+
         foreach (Transform Parent in BasicLines)
         {
             foreach(Transform Line in Parent)
             {
-                BasicLine.Add(Line.GetComponent<Point>());
+                BasicLine[0].Points.Add(Line.GetComponent<Point>());
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

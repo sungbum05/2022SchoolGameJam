@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class Yut : MonoBehaviour
 {
+    public bool IsCanDraw = false;
+
+    [SerializeField]
+    Vector3 OriginalPos;
+    [SerializeField]
+    Quaternion OriginalRot;
+
     [SerializeField]
     RaycastHit hit;
     [SerializeField]
     LayerMask layerMask;
+    [SerializeField]
+    bool IsDraw = false;
     [SerializeField]
     bool IsRotation = false;
     [SerializeField]
@@ -15,15 +24,18 @@ public class Yut : MonoBehaviour
     [SerializeField]
     Vector3 RotationVec;
 
+    private void Awake()
+    {
+        OriginalPos = this.transform.position;
+        OriginalRot = this.transform.rotation;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && IsCanDraw == true)
         {
-            this.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-0.2f, 0.2f), 1.0f, Random.Range(-0.2f, 0.2f)) * 5.0f, ForceMode.Impulse);
-
-            RotationVec = new Vector3(Random.Range(-RotationValue, RotationValue), Random.Range(-RotationValue, RotationValue), Random.Range(-RotationValue, RotationValue)) * Time.deltaTime;
-            IsRotation = true;
+            DrawYut();
         }
 
         if(IsRotation == true)
@@ -34,22 +46,52 @@ public class Yut : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Floor"))
+        if(collision.gameObject.CompareTag("Floor") && IsDraw == true)
         {
             IsRotation = false;
+            IsDraw = false;
 
             StartCoroutine(FloorCheck());
         }
     }
 
+    public void DrawYut()
+    {
+        IsCanDraw = false;
+
+        this.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-0.2f, 0.2f), 1.0f, Random.Range(-0.2f, 0.2f)) * 5.0f, ForceMode.Impulse);
+
+        RotationVec = new Vector3(Random.Range(-RotationValue, RotationValue), Random.Range(-RotationValue, RotationValue), Random.Range(-RotationValue, RotationValue)) * Time.deltaTime;
+        IsDraw = true;
+        IsRotation = true;
+    }
+
+    void ResetPos()
+    {
+        this.transform.rotation = OriginalRot;
+        this.transform.position = OriginalPos;
+    }
+
     IEnumerator FloorCheck()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(4.0f);
 
         Debug.DrawRay(transform.position, -transform.forward * 15.0f, Color.blue, 2.5f);
         if (Physics.Raycast(transform.position, -transform.forward, out hit, 15.0f, layerMask))
         {
-            Debug.Log("Floor");
+
         }
+
+        else
+        {
+            YutMgr.FleepCnt++;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        YutMgr.ClearYutCnt++;
+        ResetPos();
+
+        yield break;
     }
 }
