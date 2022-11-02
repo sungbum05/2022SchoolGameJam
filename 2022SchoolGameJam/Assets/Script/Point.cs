@@ -13,10 +13,12 @@ public class Point : MonoBehaviour
     int PointNumber;
     [SerializeField]
     PlayerNum PlayerNum;
-    [SerializeField]
-    bool IsOnPlayer;
-    [SerializeField]
-    bool GoToHide;
-    [SerializeField]
-    bool IsEnd;
+
+
+    public LineClass HideLine_1;
+    public LineClass HideLine_2;
+
+    public bool IsOnPlayer;
+    public bool IsGoToHide;
+    public bool IsEnd;
 }
