@@ -24,6 +24,9 @@ public class Yut : MonoBehaviour
     [SerializeField]
     Vector3 RotationVec;
 
+
+   
+
     private void Awake()
     {
         OriginalPos = this.transform.position;
@@ -64,6 +67,7 @@ public class Yut : MonoBehaviour
         RotationVec = new Vector3(Random.Range(-RotationValue, RotationValue), Random.Range(-RotationValue, RotationValue), Random.Range(-RotationValue, RotationValue)) * Time.deltaTime;
         IsDraw = true;
         IsRotation = true;
+        
     }
 
     void ResetPos()
