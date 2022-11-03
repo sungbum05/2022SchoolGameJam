@@ -17,13 +17,16 @@ public class YutMgr : MonoBehaviour
     {
         if (ClearYutCnt >= 4)
         {
-            Debug.Log(FleepCnt);
-
             GameMgr.Instance.CurTurnPlayer.YutStack.Add((YutType)FleepCnt);
             GameMgr.Instance.IsYutDraw = true;
 
             FleepCnt = 0;
             ClearYutCnt = 0;
+        }
+
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            FleepCnt = 3;
         }
             
 

@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
 
             RaycastHit hit;
 
-            if(Physics.Raycast(ray, out hit,15.0f,layerMask))
+            if (Physics.Raycast(ray, out hit, 15.0f, layerMask))
             {
                 SelectPin = hit.transform.gameObject;
                 IsSelectPin = true;
@@ -181,52 +181,117 @@ public class Player : MonoBehaviour
     {
         yield return null;
 
-        #region 샛길 계산
-        if (IsCanHideLine == true)
+        //MiddlePoint가 아닐 때
+        if (CurPoint.IsMiddlePoint == false)
         {
-            int HideLineIdx = 0;
+            #region 샛길 계산
+            if (IsCanHideLine == true)
+            {
+                int HideLineIdx = 0;
+
+                HideLine_1 = CurPoint.HideLine_1;
+                HideLine_2 = CurPoint.HideLine_2;
+
+                Pin2.transform.position = HideLine_1.Points[HideLineIdx + MoveValue].transform.position;
+                OnPin2();
+            }
+            #endregion
+
+            if (CurLine.Count > LineIdx + MoveValue)
+            {
+                Pin1.transform.position = CurLine[LineIdx + MoveValue].transform.position;
+            }
+
+            else
+            {
+                IsEnd = true;
+                Pin1.transform.position = Board.Instance.EndPoint.transform.position;
+            }
+
+            OnPin1();
+
+            while (true)
+            {
+                yield return null;
+
+                if (IsSelectPin == true)
+                    break;
+            }
+
+            OffPin();
+
+            if (SelectPin.name.Equals(Pin1.name))
+            {
+                yield return null;
+            }
+
+            else if (SelectPin.name.Equals(Pin2.name))
+            {
+                CurLine = HideLine_1.Points;
+                LineIdx = 0;
+            }
+        }
+
+        //MiddlePoint가 맞을 때
+        else if(CurPoint.IsMiddlePoint == true)
+        {
+            #region 첫번째 경로
+            int HideLineIdx_1 = 0;
 
             HideLine_1 = CurPoint.HideLine_1;
+
+            if (HideLine_1.Points.Count < HideLineIdx_1 + MoveValue)
+            {
+                Pin1.transform.position = Board.Instance.EndPoint.transform.position;
+            }
+
+            else
+            {
+                Pin1.transform.position = HideLine_1.Points[HideLineIdx_1 + MoveValue].transform.position;
+            }
+
+            OnPin1();
+            #endregion
+
+            #region 두번째 경로
+            int HideLineIdx_2 = 0;
+
             HideLine_2 = CurPoint.HideLine_2;
 
-            Pin2.transform.position = HideLine_1.Points[HideLineIdx + MoveValue].transform.position;
+            if (HideLine_2.Points.Count < HideLineIdx_2 + MoveValue)
+            {
+                Pin2.transform.position = Board.Instance.EndPoint.transform.position;
+            }
+
+            else
+            {
+                Pin2.transform.position = HideLine_2.Points[HideLineIdx_2 + MoveValue].transform.position;
+            }
+
             OnPin2();
-        }
-        #endregion
+            #endregion
 
+            while (true)
+            {
+                yield return null;
 
-        if (CurLine.Count > LineIdx + MoveValue)
-        {
-            Pin1.transform.position = CurLine[LineIdx + MoveValue].transform.position;
-        }
+                if (IsSelectPin == true)
+                    break;
+            }
 
-        else
-        {
-            IsEnd = true;
-            Pin1.transform.position = Board.Instance.EndPoint.transform.position;
-        }
+            OffPin();
 
-        OnPin1();
+            if (SelectPin.name.Equals(Pin1.name))
+            {
+                CurLine = HideLine_1.Points;
+                LineIdx = 0;
+            }
 
-        while (true)
-        {
-            yield return null;
-
-            if (IsSelectPin == true)
-                break;
-        }
-
-        OffPin();
-
-        if(SelectPin.name.Equals(Pin1.name))
-        {
-            yield return null;
-        }
-
-        else if(SelectPin.name.Equals(Pin2.name))
-        {
-            CurLine = HideLine_1.Points;
-            LineIdx = 0;
+            else if (SelectPin.name.Equals(Pin2.name))
+            {
+                CurLine = HideLine_2.Points;
+                LineIdx = 0;
+            }
         }
 
         yield break;

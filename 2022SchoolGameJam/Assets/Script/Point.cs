@@ -20,5 +20,6 @@ public class Point : MonoBehaviour
 
     public bool IsOnPlayer;
     public bool IsGoToHide;
+    public bool IsMiddlePoint;
     public bool IsEnd;
 }

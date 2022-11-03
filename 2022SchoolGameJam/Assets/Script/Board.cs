@@ -42,5 +42,7 @@ public class Board : MonoBehaviour
                 BasicLine[0].Points.Add(Line.GetComponent<Point>());
             }
         }
+
+        BasicLine[0].Points.Add(BasicLines.GetChild(0).GetChild(0).GetComponent<Point>());
     }
 }
