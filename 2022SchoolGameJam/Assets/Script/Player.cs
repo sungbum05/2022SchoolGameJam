@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
 
     public bool IsMyTurn = false;
     public bool IsStart = false;
+    public bool IsEnd = false;
 
     public int LineIdx = 0;
 
@@ -79,9 +80,14 @@ public class Player : MonoBehaviour
         StartCoroutine(YutStackCalculator(Type));
     }
 
-    public void OnPin()
+    #region On/Off Pin
+    public void OnPin1()
     {
         Pin1.SetActive(true);
+    }
+
+    public void OnPin2()
+    {
         Pin2.SetActive(true);
     }
 
@@ -90,6 +96,7 @@ public class Player : MonoBehaviour
         Pin1.SetActive(false);
         Pin2.SetActive(false);
     }
+    #endregion
 
     public void ResetPlayer()
     {
@@ -97,11 +104,6 @@ public class Player : MonoBehaviour
         SelectPin = null;
 
         GameMgr.Instance.IsPlayerMove = true;
-    }
-
-    IEnumerator ChangeLine()
-    {
-        yield return null;
     }
 
     IEnumerator YutStackCalculator(YutType Type)
@@ -137,6 +139,13 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < MoveValue; i++)
         {
+            if (LineIdx >= CurLine.Count - 1)
+            {
+                this.transform.position = Board.Instance.EndPoint.transform.position + new Vector3(0, 0.1f, 0);
+
+                break;
+            }
+
             StartCoroutine(Move(CurLine[++LineIdx]));
             yield return new WaitForSeconds(0.5f);
         }
@@ -166,12 +175,23 @@ public class Player : MonoBehaviour
             HideLine_2 = CurPoint.HideLine_2;
 
             Pin2.transform.position = HideLine_1.Points[HideLineIdx + MoveValue].transform.position;
+            OnPin2();
         }
         #endregion
 
-        Pin1.transform.position = CurLine[LineIdx + MoveValue].transform.position;
 
-        OnPin();
+        if (CurLine.Count > LineIdx + MoveValue)
+        {
+            Pin1.transform.position = CurLine[LineIdx + MoveValue].transform.position;
+        }
+
+        else
+        {
+            IsEnd = true;
+            Pin1.transform.position = Board.Instance.EndPoint.transform.position;
+        }
+
+        OnPin1();
 
         while (true)
         {
