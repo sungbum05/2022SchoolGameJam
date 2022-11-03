@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2628,7 +2628,7 @@ GameObject:
   - component: {fileID: 952044413}
   - component: {fileID: 952044412}
   - component: {fileID: 952044411}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pin1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3413,7 +3413,7 @@ GameObject:
   - component: {fileID: 1502699296}
   - component: {fileID: 1502699295}
   - component: {fileID: 1502699294}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pin2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5464,6 +5464,7 @@ MonoBehaviour:
   IsMyTurn: 0
   IsStart: 0
   LineIdx: 0
+  SelectPin: {fileID: 0}
   Pin1: {fileID: 952044410}
   Pin2: {fileID: 1502699293}
   HideLine_1:
@@ -5475,6 +5476,9 @@ MonoBehaviour:
   CurLine: []
   CurPoint: {fileID: 0}
   IsCanHideLine: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
   YutStack: 
 --- !u!4 &3745622626605164017
 Transform:
@@ -5906,6 +5910,7 @@ MonoBehaviour:
   IsMyTurn: 0
   IsStart: 0
   LineIdx: 0
+  SelectPin: {fileID: 0}
   Pin1: {fileID: 952044410}
   Pin2: {fileID: 1502699293}
   HideLine_1:
@@ -5917,6 +5922,9 @@ MonoBehaviour:
   CurLine: []
   CurPoint: {fileID: 0}
   IsCanHideLine: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
   YutStack: 
 --- !u!4 &8476140622115121634
 Transform:
@@ -5967,6 +5975,7 @@ MonoBehaviour:
   IsMyTurn: 0
   IsStart: 0
   LineIdx: 0
+  SelectPin: {fileID: 0}
   Pin1: {fileID: 952044410}
   Pin2: {fileID: 1502699293}
   HideLine_1:
@@ -5978,6 +5987,9 @@ MonoBehaviour:
   CurLine: []
   CurPoint: {fileID: 0}
   IsCanHideLine: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
   YutStack: 
 --- !u!23 &8544783546528956082
 MeshRenderer:

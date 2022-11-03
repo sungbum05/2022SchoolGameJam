@@ -35,7 +35,7 @@ public class GameMgr : MonoBehaviour
             PlayerList[i].IsMyTurn = true;
 
             CurTurnPlayer = PlayerList[i];
-            CurTurnPlayer.BasicSetting();
+            CurTurnPlayer.UpdateSetting();
 
             #region ภท ด๘มü
             if(CurTurnPlayer.PlayerType == PlayerType.Robot)

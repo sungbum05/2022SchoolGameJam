@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     public int LineIdx = 0;
 
     public GameObject SelectPin;
+    public bool IsSelectPin = false;
+
     public GameObject Pin1;
     public GameObject Pin2;
 
@@ -40,6 +42,11 @@ public class Player : MonoBehaviour
 
     public List<YutType> YutStack;
 
+    private void Start()
+    {
+        BasicSetting();
+    }
+
     private void Update()
     {
         if (Input.GetMouseButton(0))
@@ -51,7 +58,8 @@ public class Player : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit,15.0f,layerMask))
             {
-               Debug.Log(hit.transform.name);
+                SelectPin = hit.transform.gameObject;
+                IsSelectPin = true;
             }
         }
     }
@@ -59,13 +67,36 @@ public class Player : MonoBehaviour
     public void BasicSetting()
     {
         CurLine = Board.Instance.BasicLine[0].Points;
+    }
 
+    public void UpdateSetting()
+    {
         StartCoroutine(Move(CurLine[LineIdx]));
     }
 
     public void StartCalculator(YutType Type)
     {
         StartCoroutine(YutStackCalculator(Type));
+    }
+
+    public void OnPin()
+    {
+        Pin1.SetActive(true);
+        Pin2.SetActive(true);
+    }
+
+    public void OffPin()
+    {
+        Pin1.SetActive(false);
+        Pin2.SetActive(false);
+    }
+
+    public void ResetPlayer()
+    {
+        IsSelectPin = false;
+        SelectPin = null;
+
+        GameMgr.Instance.IsPlayerMove = true;
     }
 
     IEnumerator ChangeLine()
@@ -114,8 +145,8 @@ public class Player : MonoBehaviour
             IsCanHideLine = true;
 
         YutStack.Remove(Type);
-        GameMgr.Instance.IsPlayerMove = true;
 
+        ResetPlayer();
         yield break;
     }
 
@@ -137,13 +168,30 @@ public class Player : MonoBehaviour
 
         Pin1.transform.position = CurLine[LineIdx + MoveValue].transform.position;
 
+        OnPin();
 
         while (true)
         {
             yield return null;
 
-            Debug.DrawRay(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition) * 15.0f, Color.blue, 2.5f);
+            if (IsSelectPin == true)
+                break;
         }
+
+        OffPin();
+
+        if(SelectPin.name.Equals(Pin1.name))
+        {
+            yield return null;
+        }
+
+        else if(SelectPin.name.Equals(Pin2.name))
+        {
+            CurLine = HideLine_1.Points;
+            LineIdx = 0;
+        }
+
+        yield break;
     }
 
     IEnumerator Move(Point point)
