@@ -39,7 +39,7 @@ public class Yut : MonoBehaviour
 
         if(IsRotation == true)
         {
-            //this.gameObject.transform.Rotate(RotationVec);
+            this.gameObject.transform.Rotate(RotationVec);
         }
     }
 
@@ -58,7 +58,7 @@ public class Yut : MonoBehaviour
     {
         IsCanDraw = false;
 
-        this.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-0.2f, 0.2f), 1.0f, Random.Range(-0.2f, 0.2f)) * 5.0f, ForceMode.Impulse);
+        this.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-0.3f, 0.3f), 1.0f, Random.Range(-0.3f, 0.3f)) * 5.0f, ForceMode.Impulse);
 
         RotationVec = new Vector3(Random.Range(-RotationValue, RotationValue), Random.Range(-RotationValue, RotationValue), Random.Range(-RotationValue, RotationValue)) * Time.deltaTime;
         IsDraw = true;

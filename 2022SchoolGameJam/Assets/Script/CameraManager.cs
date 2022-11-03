@@ -20,11 +20,24 @@ public class CameraManager : MonoBehaviour
 
     [Header("CameraMove")]
     [SerializeField]
+    int idx = 0;
+    [SerializeField]
+    Coroutine CameraAngleCoroutine;
+
+    [SerializeField]
     Vector3 OriginalCameraPos;
     [SerializeField]
     Vector3 YutCameraPos;
     [SerializeField]
     Vector3 FreeCameraPos;
+
+    [SerializeField]
+    Vector3 FixCameraRot;
+    [SerializeField]
+    Vector3 FreeCameraRot;
+
+    [SerializeField]
+    Vector3 OriginalFreeRot;
 
     private void Awake()
     {
@@ -37,6 +50,11 @@ public class CameraManager : MonoBehaviour
         Volume.profile.TryGetSettings(out Vignette);
 
         StartCoroutine(CameraFade("Up"));
+    }
+
+    private void Update()
+    {
+        ChangeCameraAngle();
     }
 
     IEnumerator CameraFade(string Type)
@@ -63,6 +81,70 @@ public class CameraManager : MonoBehaviour
                 StartCoroutine(CameraFade("Up"));
                 break;
         }
+
+        yield break;
+    }
+
+    public void ChangeCameraAngle()
+    {
+        if(Input.GetKeyDown(KeyCode.A) && CameraAngleCoroutine == null)
+        {
+            idx++;
+
+            if (idx > 2)
+                idx = 0;
+
+            switch(idx)
+            {
+                case 0:
+                    CameraAngleCoroutine = StartCoroutine(FixMyTurnCamera());
+                    break;
+
+                case 1:
+                    CameraAngleCoroutine = StartCoroutine(FixYutCamera());
+                    break;
+
+                case 2:
+                    CameraAngleCoroutine = StartCoroutine(FreeCamera());
+                    break;
+            }
+        }
+    }
+
+    IEnumerator FixMyTurnCamera()
+    {
+        yield return null;
+
+        this.transform.DOMove(OriginalCameraPos, 1.0f);
+        this.transform.DORotate(FixCameraRot, 1.0f);
+
+        yield return new WaitForSeconds(1.0f);
+
+        CameraAngleCoroutine = null;
+
+        yield break;
+    }
+
+    IEnumerator FixYutCamera()
+    {
+        this.transform.DOMove(YutCameraPos, 1.0f);
+        this.transform.DORotate(FixCameraRot, 1.0f);
+
+        yield return new WaitForSeconds(1.0f);
+
+        CameraAngleCoroutine = null;
+
+        yield break;
+    }
+
+    IEnumerator FreeCamera()
+    {
+        this.transform.DOMove(FreeCameraPos, 1.0f);
+        this.transform.DORotate(FreeCameraRot, 1.0f);
+
+        yield return new WaitForSeconds(1.0f);
+
+        CameraAngleCoroutine = null;
 
         yield break;
     }

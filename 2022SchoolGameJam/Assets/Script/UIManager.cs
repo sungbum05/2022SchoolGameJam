@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
 
     public GameObject gameTitle;
 
+    public GameObject PlayerIcons;
     public Text GuideText;
 
     private void Awake()
@@ -35,6 +36,7 @@ public class UIManager : MonoBehaviour
         StartCoroutine(soundManager.bellBgm());
         GameMgr.Instance.StartGame();
 
+        PlayerIcons.SetActive(true);
         OnGuideText("게임 시작!");
     }
 

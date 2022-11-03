@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
     public LineClass HideLine_1;
     public LineClass HideLine_2;
 
+    public GameObject MyTurnText;
+
     [SerializeField]
     List<Point> CurLine;
     [SerializeField]
@@ -120,6 +122,7 @@ public class Player : MonoBehaviour
     IEnumerator YutStackCalculator()
     {
         yield return null;
+
         int Stack = YutStack.Count;
 
         for (int StackCount = 0; StackCount < Stack; StackCount++)
@@ -205,7 +208,9 @@ public class Player : MonoBehaviour
             CurPoint.IsOnPlayer = true;
         }
 
+        MyTurnText.SetActive(false);
         GameMgr.Instance.IsPlayerMove = true;
+
         yield break;
     }
 

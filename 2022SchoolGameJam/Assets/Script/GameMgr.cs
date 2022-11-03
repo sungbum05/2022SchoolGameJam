@@ -35,6 +35,8 @@ public class GameMgr : MonoBehaviour
             PlayerList[i].IsMyTurn = true;
             CurTurnPlayer = PlayerList[i];
 
+            CurTurnPlayer.MyTurnText.SetActive(true);
+
             if (CurTurnPlayer.IsEnd == false)
             {
                 CurTurnPlayer.UpdateSetting();
