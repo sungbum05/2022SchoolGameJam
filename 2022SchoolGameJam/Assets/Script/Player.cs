@@ -28,6 +28,9 @@ public class Player : MonoBehaviour
     public GameObject Pin1;
     public GameObject Pin2;
 
+    public Point Pin1Point = null;
+    public Point Pin2Point = null;
+
     public LineClass HideLine_1;
     public LineClass HideLine_2;
 
@@ -57,7 +60,7 @@ public class Player : MonoBehaviour
 
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 15.0f, layerMask))
+            if (Physics.Raycast(ray, out hit, 15.0f, layerMask) && IsMyTurn == true)
             {
                 SelectPin = hit.transform.gameObject;
                 IsSelectPin = true;
@@ -140,7 +143,7 @@ public class Player : MonoBehaviour
         if (IsEnd == true)
         {
             CurPoint = Board.Instance.EndPoint;
-            this.transform.position = CurPoint.transform.position;
+            this.transform.position = CurPoint.transform.position + new Vector3(0, 0.1f, 0);
 
             LineIdx = 11;
 
@@ -192,6 +195,8 @@ public class Player : MonoBehaviour
                 HideLine_1 = CurPoint.HideLine_1;
                 HideLine_2 = CurPoint.HideLine_2;
 
+                Pin2Point = HideLine_1.Points[HideLineIdx + MoveValue];
+
                 Pin2.transform.position = HideLine_1.Points[HideLineIdx + MoveValue].transform.position;
                 OnPin2();
             }
@@ -199,16 +204,58 @@ public class Player : MonoBehaviour
 
             if (CurLine.Count > LineIdx + MoveValue)
             {
+                Pin1Point = CurLine[LineIdx + MoveValue];
+
                 Pin1.transform.position = CurLine[LineIdx + MoveValue].transform.position;
             }
 
             else
             {
+                Pin1Point = Board.Instance.EndPoint;
+
                 IsEnd = true;
                 Pin1.transform.position = Board.Instance.EndPoint.transform.position;
             }
 
             OnPin1();
+
+            //미들 포인트에서의 인공지능 선택
+            if (PlayerType == PlayerType.Robot)
+            {
+                yield return new WaitForSeconds(1.0f);
+
+                if (Pin2Point == null)
+                {
+                    Debug.Log("1");
+                    SelectPin = Pin1.transform.gameObject;
+                }
+
+                else
+                {
+                    if(Pin2Point.IsOnPlayer == true)
+                    {
+                        Debug.Log("2");
+                        SelectPin = Pin2.transform.gameObject;
+                    }
+
+                    else if (Pin1Point.IsOnPlayer == true)
+                    {
+                        Debug.Log("3");
+                        SelectPin = Pin1.transform.gameObject;
+                    }
+
+                    else if(Pin2Point.IsOnPlayer == false && Pin1Point.IsOnPlayer == false)
+                    {
+                        Debug.Log("4");
+                        SelectPin = Pin2.transform.gameObject;
+                    }
+                }
+
+                IsSelectPin = true;
+            }
+
+            Pin1Point = null;
+            Pin2Point = null;
 
             while (true)
             {
@@ -233,7 +280,7 @@ public class Player : MonoBehaviour
         }
 
         //MiddlePoint가 맞을 때
-        else if(CurPoint.IsMiddlePoint == true)
+        else if (CurPoint.IsMiddlePoint == true)
         {
             #region 첫번째 경로
             int HideLineIdx_1 = 0;
@@ -242,11 +289,15 @@ public class Player : MonoBehaviour
 
             if (HideLine_1.Points.Count < HideLineIdx_1 + MoveValue)
             {
+                Pin1Point = Board.Instance.EndPoint;
+
                 Pin1.transform.position = Board.Instance.EndPoint.transform.position;
             }
 
             else
             {
+                Pin1Point = HideLine_1.Points[HideLineIdx_1 + MoveValue];
+
                 Pin1.transform.position = HideLine_1.Points[HideLineIdx_1 + MoveValue].transform.position;
             }
 
@@ -260,16 +311,46 @@ public class Player : MonoBehaviour
 
             if (HideLine_2.Points.Count < HideLineIdx_2 + MoveValue)
             {
+                Pin2Point = Board.Instance.EndPoint;
+
                 Pin2.transform.position = Board.Instance.EndPoint.transform.position;
             }
 
             else
             {
+                Pin2Point = HideLine_2.Points[HideLineIdx_2 + MoveValue];
+
                 Pin2.transform.position = HideLine_2.Points[HideLineIdx_2 + MoveValue].transform.position;
             }
 
             OnPin2();
             #endregion
+
+            //미들 포인트에서의 인공지능 선택
+            if (PlayerType == PlayerType.Robot)
+            {
+                yield return new WaitForSeconds(1.0f);
+
+                if (Pin1Point.IsOnPlayer == true)
+                {
+                    SelectPin = Pin1.transform.gameObject;
+                }
+
+                else if (Pin2Point.IsOnPlayer == true)
+                {
+                    SelectPin = Pin2.transform.gameObject;
+                }
+
+                else if (Pin1Point.IsOnPlayer == false && Pin2Point.IsOnPlayer == false)
+                {
+                    SelectPin = Pin1.transform.gameObject;
+                }
+
+                IsSelectPin = true;
+            }
+
+            Pin1Point = null;
+            Pin2Point = null;
 
             while (true)
             {

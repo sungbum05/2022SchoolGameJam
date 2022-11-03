@@ -78,6 +78,8 @@ public class GameMgr : MonoBehaviour
 
                 IsYutDraw = false;
                 IsPlayerMove = false;
+
+                CurTurnPlayer.IsMyTurn = false;
             }
         }
 

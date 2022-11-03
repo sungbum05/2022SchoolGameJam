@@ -43,7 +43,7 @@ public class Yut : MonoBehaviour
 
         if(IsRotation == true)
         {
-            //this.gameObject.transform.Rotate(RotationVec);
+            this.gameObject.transform.Rotate(RotationVec);
         }
     }
 
