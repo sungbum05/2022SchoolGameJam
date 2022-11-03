@@ -7095,7 +7095,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.11927328, g: 0.03019382, b: 0.008045337, a: 1}
+  m_Color: {r: 0.16981131, g: 0.03638814, b: 0, a: 1}
   m_Intensity: 25
   m_Range: 10
   m_SpotAngle: 30
@@ -7180,6 +7180,7 @@ MonoBehaviour:
   PlayerType: 0
   IsMyTurn: 0
   IsStart: 0
+  IsEnd: 0
   LineIdx: 0
   SelectPin: {fileID: 0}
   IsSelectPin: 0
@@ -7627,6 +7628,7 @@ MonoBehaviour:
   PlayerType: 1
   IsMyTurn: 0
   IsStart: 0
+  IsEnd: 0
   LineIdx: 0
   SelectPin: {fileID: 0}
   IsSelectPin: 0
@@ -7693,6 +7695,7 @@ MonoBehaviour:
   PlayerType: 1
   IsMyTurn: 0
   IsStart: 0
+  IsEnd: 0
   LineIdx: 0
   SelectPin: {fileID: 0}
   IsSelectPin: 0

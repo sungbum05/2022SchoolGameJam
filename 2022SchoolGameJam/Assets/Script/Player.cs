@@ -137,29 +137,44 @@ public class Player : MonoBehaviour
 
         yield return StartCoroutine(PinMovePos(MoveValue));
 
-        for (int i = 0; i < MoveValue; i++)
+        if (IsEnd == true)
         {
-            if (LineIdx >= CurLine.Count - 1)
-            {
-                this.transform.position = Board.Instance.EndPoint.transform.position + new Vector3(0, 0.1f, 0);
+            CurPoint = Board.Instance.EndPoint;
+            this.transform.position = CurPoint.transform.position;
 
-                break;
-            }
+            LineIdx = 11;
 
-            StartCoroutine(Move(CurLine[++LineIdx]));
-            yield return new WaitForSeconds(0.5f);
+            if (CurPoint.IsGoToHide == true)
+                IsCanHideLine = true;
+
+            else
+                IsCanHideLine = false;
+
+            YutStack.Remove(Type);
+
+            ResetPlayer();
+            yield break;
         }
 
-        if (CurPoint.IsGoToHide == true)
-            IsCanHideLine = true;
-
         else
-            IsCanHideLine = false;
+        {
+            for (int i = 0; i < MoveValue; i++)
+            {
+                StartCoroutine(Move(CurLine[++LineIdx]));
+                yield return new WaitForSeconds(0.5f);
+            }
 
-        YutStack.Remove(Type);
+            if (CurPoint.IsGoToHide == true)
+                IsCanHideLine = true;
 
-        ResetPlayer();
-        yield break;
+            else
+                IsCanHideLine = false;
+
+            YutStack.Remove(Type);
+
+            ResetPlayer();
+            yield break;
+        }
     }
 
     IEnumerator PinMovePos(int MoveValue)

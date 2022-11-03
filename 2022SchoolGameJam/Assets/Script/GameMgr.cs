@@ -33,49 +33,52 @@ public class GameMgr : MonoBehaviour
         for (int i = 0; i < PlayerList.Count; i++)
         {
             PlayerList[i].IsMyTurn = true;
-
             CurTurnPlayer = PlayerList[i];
-            CurTurnPlayer.UpdateSetting();
 
-            #region À· ´øÁü
-            if(CurTurnPlayer.PlayerType == PlayerType.Robot)
+            if (CurTurnPlayer.IsEnd == false)
             {
-                yield return new WaitForSeconds(1.0f);
+                CurTurnPlayer.UpdateSetting();
 
-                foreach(var Obj in Yuts)
+                #region À· ´øÁü
+                if (CurTurnPlayer.PlayerType == PlayerType.Robot)
                 {
-                    Obj.DrawYut();
+                    yield return new WaitForSeconds(1.0f);
+
+                    foreach (var Obj in Yuts)
+                    {
+                        Obj.DrawYut();
+                    }
                 }
+
+                foreach (var Obj in Yuts)
+                {
+                    Obj.IsCanDraw = true;
+                }
+                //À·À» ´øÁ³´Â°¡?
+                while (true)
+                {
+                    yield return null;
+
+                    if (IsYutDraw == true)
+                        break;
+                }
+                #endregion
+
+                CurTurnPlayer.StartCalculator(CurTurnPlayer.YutStack[0]);
+
+                #region ÇÃ·¹ÀÌ¾î ¿òÁ÷ÀÓ
+                while (true)
+                {
+                    yield return null;
+
+                    if (IsPlayerMove == true)
+                        break;
+                }
+                #endregion
+
+                IsYutDraw = false;
+                IsPlayerMove = false;
             }
-
-            foreach (var Obj in Yuts)
-            {
-                Obj.IsCanDraw = true;
-            }
-            //À·À» ´øÁ³´Â°¡?
-            while (true)
-            {
-                yield return null;
-
-                if (IsYutDraw == true)
-                    break;
-            }
-            #endregion
-
-            CurTurnPlayer.StartCalculator(CurTurnPlayer.YutStack[0]);
-
-            #region ÇÃ·¹ÀÌ¾î ¿òÁ÷ÀÓ
-            while(true)
-            {
-                yield return null;
-
-                if (IsPlayerMove == true)
-                    break;
-            }
-            #endregion
-
-            IsYutDraw = false;
-            IsPlayerMove = false;
         }
 
         StartCoroutine(GameRutineSystem());
