@@ -34,6 +34,8 @@ public class UIManager : MonoBehaviour
     {
         isStart = true;
         gameTitle.SetActive(false);
+        soundManager.PlayBGM(soundManager.masterVolume);
+        StartCoroutine(soundManager.bellBgm());
     }
 
     public void ClickSound()

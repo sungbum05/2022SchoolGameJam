@@ -16,11 +16,16 @@ public class SoundManager : MonoBehaviour
 
     AudioSource bgmPlayer;
     AudioSource sfxPlayer;
+    AudioSource BellPlayer;
 
     [SerializeField]
-    AudioClip bgmAudioClip;
+    AudioClip InGameBgmAudioClip;
 
-    
+    [SerializeField]
+    AudioClip TitlebgmAudioClip;
+
+    [SerializeField]
+    AudioClip BellbgmAudioClip;
 
     [SerializeField]
     AudioClip[] sfxAudioClips;
@@ -30,12 +35,14 @@ public class SoundManager : MonoBehaviour
     {
         bgmPlayer = GameObject.Find("BGMPlayer").GetComponent<AudioSource>();
         sfxPlayer = GameObject.Find("SFXPlayer").GetComponent<AudioSource>();
+        BellPlayer = GameObject.Find("BellPlayer").GetComponent<AudioSource>();
 
-        foreach(AudioClip clip in sfxAudioClips)
+        foreach (AudioClip clip in sfxAudioClips)
         {
             audioClipDictionary.Add(clip.name, clip);
         }
-        PlayBGM(masterVolume);
+        TitleBGM(masterVolume);
+
     }
 
     public void PlaySFX(string name, float volume)
@@ -51,20 +58,40 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBGM(float volume)
     {
+        bgmPlayer.Stop();
         bgmPlayer.loop = true;
         bgmPlayer.volume = 1 * (volume / 3);
-
-        bgmPlayer.clip = bgmAudioClip;
+        bgmPlayer.clip = InGameBgmAudioClip;
         bgmPlayer.Play();
+    }
+
+    public void TitleBGM(float volume)
+    {
+        bgmPlayer.loop = true;
+        bgmPlayer.volume = 1 * (volume / 3);
+        bgmPlayer.clip = TitlebgmAudioClip;
+        bgmPlayer.Play();
+    }
+
+    public void BellBGM(float volume)
+    {
+        BellPlayer.loop = false;
+        BellPlayer.volume = 1 * (volume / 3);
+        BellPlayer.clip = BellbgmAudioClip;
+        BellPlayer.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
         bgmPlayer.volume = 1 * ((float)masterVolume / 3);
+        BellPlayer.volume = 1 * ((float)masterVolume / 3);
+        
         if (Input.GetKeyDown(KeyCode.Space))
             PlaySFX("Yut_Drop1", 3f);
     }
+
+
 
     public void OpenExplainWindow()
     {
@@ -83,6 +110,17 @@ public class SoundManager : MonoBehaviour
     public void ClickButton()
     {
         PlaySFX("Button_Click", masterVolume);
+    }
+
+    public IEnumerator bellBgm()
+    {
+        if(uiManager.isStart)
+        {
+            float randomCool = Random.Range(180, 300);
+            BellBGM(masterVolume);
+            yield return new WaitForSeconds(randomCool);
+        }
+        StartCoroutine(bellBgm());
     }
 
     
