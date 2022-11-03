@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance; 
+
     public Image SoundButton;
     public Sprite[] SoundStack = new Sprite[4];
 
@@ -16,19 +19,13 @@ public class UIManager : MonoBehaviour
     public GameObject explain;
 
     public GameObject gameTitle;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Text GuideText;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void OnStart()
     {
@@ -36,6 +33,9 @@ public class UIManager : MonoBehaviour
         gameTitle.SetActive(false);
         soundManager.PlayBGM(soundManager.masterVolume);
         StartCoroutine(soundManager.bellBgm());
+        GameMgr.Instance.StartGame();
+
+        OnGuideText("게임 시작!");
     }
 
     public void ClickSound()
@@ -76,5 +76,25 @@ public class UIManager : MonoBehaviour
     {
         UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();
+    }
+
+    public void OnGuideText(string Content)
+    {
+        GuideText.text = Content;
+
+        GuideText.gameObject.SetActive(true);
+        StartCoroutine(FadeGuideText());
+    }
+
+    IEnumerator FadeGuideText()
+    {
+        yield return null;
+
+        GuideText.DOFade(0, 2);
+
+        yield return new WaitForSeconds(2.0f);
+        GuideText.gameObject.SetActive(false);
+
+        yield break;
     }
 }

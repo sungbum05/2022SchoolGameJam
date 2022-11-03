@@ -21,7 +21,7 @@ public class GameMgr : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    public void StartGame()
     {
         StartCoroutine(GameRutineSystem());
     }

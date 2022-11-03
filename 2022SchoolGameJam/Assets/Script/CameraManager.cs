@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.Rendering.PostProcessing;
 
 public class CameraManager : MonoBehaviour
 {
+    public static CameraManager Instance;
+
+    [Header("PostProcessing")]
     [SerializeField]
     PostProcessVolume Volume;
     [SerializeField]
@@ -13,6 +17,19 @@ public class CameraManager : MonoBehaviour
     float MinValue, MaxValue;
     [SerializeField]
     float Speed;
+
+    [Header("CameraMove")]
+    [SerializeField]
+    Vector3 OriginalCameraPos;
+    [SerializeField]
+    Vector3 YutCameraPos;
+    [SerializeField]
+    Vector3 FreeCameraPos;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
