@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Button SoundButton;
+
+    public GameObject explain;
     
     // Start is called before the first frame update
     void Start()
@@ -20,20 +22,25 @@ public class UIManager : MonoBehaviour
     }
 
 
-    void OnStart()
+    public void OnStart()
     {
 
     }
 
-    void HowToPlay()
+    public void HowToPlay()
     {
+        explain.SetActive(true);
 
     }
 
-    void OnExit()
+    public void Close()
+    {
+        explain?.SetActive(false);
+    }
+
+    public void OnExit()
     {
         UnityEditor.EditorApplication.isPlaying = false;
-        
         Application.Quit();
     }
 }
