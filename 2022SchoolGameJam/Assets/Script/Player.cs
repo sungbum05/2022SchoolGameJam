@@ -144,6 +144,9 @@ public class Player : MonoBehaviour
         if (CurPoint.IsGoToHide == true)
             IsCanHideLine = true;
 
+        else
+            IsCanHideLine = false;
+
         YutStack.Remove(Type);
 
         ResetPlayer();
