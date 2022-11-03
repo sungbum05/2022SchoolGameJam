@@ -71,6 +71,16 @@ public class Player : MonoBehaviour
     public void BasicSetting()
     {
         CurLine = Board.Instance.BasicLine[0].Points;
+        LineIdx = 0;
+    }
+
+    public void CatchOutPlayer()
+    {
+        CurLine = Board.Instance.BasicLine[0].Points;
+        LineIdx = 0;
+
+        CurPoint = null;
+        this.transform.position = Board.Instance.OutPoint.transform.position;
     }
 
     public void UpdateSetting()
@@ -78,9 +88,9 @@ public class Player : MonoBehaviour
         StartCoroutine(Move(CurLine[LineIdx]));
     }
 
-    public void StartCalculator(YutType Type)
+    public void StartCalculator()
     {
-        StartCoroutine(YutStackCalculator(Type));
+        StartCoroutine(YutStackCalculator());
     }
 
     #region On/Off Pin
@@ -105,79 +115,98 @@ public class Player : MonoBehaviour
     {
         IsSelectPin = false;
         SelectPin = null;
-
-        GameMgr.Instance.IsPlayerMove = true;
     }
 
-    IEnumerator YutStackCalculator(YutType Type)
+    IEnumerator YutStackCalculator()
     {
         yield return null;
+        int Stack = YutStack.Count;
 
-        int MoveValue = 0;
-
-        switch (Type)
+        for (int StackCount = 0; StackCount < Stack; StackCount++)
         {
-            case YutType.도:
-                MoveValue = 1;
-                break;
+            int MoveValue = 0;
 
-            case YutType.개:
-                MoveValue = 2;
-                break;
+            //이전 위치 블럭 플레이어 데이터 제거
+            CurPoint.OnPlayer = null;
+            CurPoint.IsOnPlayer = false;
 
-            case YutType.걸:
-                MoveValue = 3;
-                break;
-
-            case YutType.윷:
-                MoveValue = 4;
-                break;
-
-            case YutType.모:
-                MoveValue = 5;
-                break;
-        }
-
-        yield return StartCoroutine(PinMovePos(MoveValue));
-
-        if (IsEnd == true)
-        {
-            CurPoint = Board.Instance.EndPoint;
-            this.transform.position = CurPoint.transform.position + new Vector3(0, 0.1f, 0);
-
-            LineIdx = 11;
-
-            if (CurPoint.IsGoToHide == true)
-                IsCanHideLine = true;
-
-            else
-                IsCanHideLine = false;
-
-            YutStack.Remove(Type);
-
-            ResetPlayer();
-            yield break;
-        }
-
-        else
-        {
-            for (int i = 0; i < MoveValue; i++)
+            switch (YutStack[0])
             {
-                StartCoroutine(Move(CurLine[++LineIdx]));
-                yield return new WaitForSeconds(0.5f);
+                case YutType.도:
+                    MoveValue = 1;
+                    break;
+
+                case YutType.개:
+                    MoveValue = 2;
+                    break;
+
+                case YutType.걸:
+                    MoveValue = 3;
+                    break;
+
+                case YutType.윷:
+                    MoveValue = 4;
+                    break;
+
+                case YutType.모:
+                    MoveValue = 5;
+                    break;
             }
 
-            if (CurPoint.IsGoToHide == true)
-                IsCanHideLine = true;
+            yield return StartCoroutine(PinMovePos(MoveValue));
+
+            if (IsEnd == true)
+            {
+                CurPoint = Board.Instance.EndPoint;
+                this.transform.position = CurPoint.transform.position + new Vector3(0, 0.1f, 0);
+
+                LineIdx = 11;
+
+                if (CurPoint.IsGoToHide == true)
+                    IsCanHideLine = true;
+
+                else
+                    IsCanHideLine = false;
+
+                YutStack.Clear();
+
+                ResetPlayer();
+
+                GameMgr.Instance.IsPlayerMove = true;
+                yield break;
+            }
 
             else
-                IsCanHideLine = false;
+            {
+                for (int i = 0; i < MoveValue; i++)
+                {
+                    StartCoroutine(Move(CurLine[++LineIdx]));
+                    yield return new WaitForSeconds(0.5f);
+                }
 
-            YutStack.Remove(Type);
+                if (CurPoint.IsGoToHide == true)
+                    IsCanHideLine = true;
 
-            ResetPlayer();
-            yield break;
+                else
+                    IsCanHideLine = false;
+
+                YutStack.Remove(YutStack[0]);
+
+                ResetPlayer();
+            }
+
+            if(CurPoint.IsOnPlayer == true)
+            {
+                CurPoint.OnPlayer.CatchOutPlayer();
+            }
+
+            //현재 위치 블럭 플레이어 데이터 삽입
+            CurPoint.OnPlayer = this;
+            CurPoint.IsOnPlayer = true;
         }
+
+        GameMgr.Instance.IsPlayerMove = true;
+        yield break;
     }
 
     IEnumerator PinMovePos(int MoveValue)

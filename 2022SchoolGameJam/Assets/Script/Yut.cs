@@ -6,6 +6,9 @@ public class Yut : MonoBehaviour
 {
     public bool IsCanDraw = false;
 
+    public bool IsDraw = false;
+    public bool IsRotation = false;
+
     [SerializeField]
     Vector3 OriginalPos;
     [SerializeField]
@@ -16,16 +19,9 @@ public class Yut : MonoBehaviour
     [SerializeField]
     LayerMask layerMask;
     [SerializeField]
-    bool IsDraw = false;
-    [SerializeField]
-    bool IsRotation = false;
-    [SerializeField]
     float RotationValue;
     [SerializeField]
     Vector3 RotationVec;
-
-
-   
 
     private void Awake()
     {
@@ -43,7 +39,7 @@ public class Yut : MonoBehaviour
 
         if(IsRotation == true)
         {
-            this.gameObject.transform.Rotate(RotationVec);
+            //this.gameObject.transform.Rotate(RotationVec);
         }
     }
 
@@ -67,7 +63,14 @@ public class Yut : MonoBehaviour
         RotationVec = new Vector3(Random.Range(-RotationValue, RotationValue), Random.Range(-RotationValue, RotationValue), Random.Range(-RotationValue, RotationValue)) * Time.deltaTime;
         IsDraw = true;
         IsRotation = true;
-        
+    }
+
+    public void RetryDrawYut()
+    {
+        IsCanDraw = true;
+
+        IsDraw = false;
+        IsRotation = false;
     }
 
     void ResetPos()

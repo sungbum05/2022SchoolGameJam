@@ -5,10 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     // Start is called before the first frame update
-
-
-
-    
+    public static SoundManager Instance;
 
     public UIManager uiManager;
 
@@ -33,6 +30,8 @@ public class SoundManager : MonoBehaviour
     Dictionary<string, AudioClip> audioClipDictionary = new Dictionary<string, AudioClip>();  
     void Awake()
     {
+        Instance = this;
+
         bgmPlayer = GameObject.Find("BGMPlayer").GetComponent<AudioSource>();
         sfxPlayer = GameObject.Find("SFXPlayer").GetComponent<AudioSource>();
         BellPlayer = GameObject.Find("BellPlayer").GetComponent<AudioSource>();
@@ -86,9 +85,6 @@ public class SoundManager : MonoBehaviour
     {
         bgmPlayer.volume = 1 * ((float)masterVolume / 3);
         BellPlayer.volume = 1 * ((float)masterVolume / 3);
-        
-        if (Input.GetKeyDown(KeyCode.Space))
-            PlaySFX("Yut_Drop1", 3f);
     }
 
 

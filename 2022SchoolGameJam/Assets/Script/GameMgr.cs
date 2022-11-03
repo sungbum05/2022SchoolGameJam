@@ -40,16 +40,33 @@ public class GameMgr : MonoBehaviour
                 CurTurnPlayer.UpdateSetting();
 
                 #region À· ´øÁü
+                YutMgr.IsYutDraw = false;
+
                 if (CurTurnPlayer.PlayerType == PlayerType.Robot)
                 {
-                    yield return new WaitForSeconds(1.0f);
-
-                    foreach (var Obj in Yuts)
+                    while (true)
                     {
-                        Obj.DrawYut();
+                        yield return null;
+
+                        if (GameMgr.Instance.IsYutDraw == false && YutMgr.IsYutDraw == false)
+                        {
+                            yield return new WaitForSeconds(1.0f);
+
+                            YutMgr.IsYutDraw = true;
+                            SoundManager.Instance.PlaySFX("Yut_Drop1", 3f);
+
+                            foreach (var Obj in Yuts)
+                            {
+                                Obj.DrawYut();
+                            }
+                        }
+
+                        else if (GameMgr.Instance.IsYutDraw == true)
+                            break;
                     }
                 }
 
+                YutMgr.IsYutDraw = false;
                 foreach (var Obj in Yuts)
                 {
                     Obj.IsCanDraw = true;
@@ -64,7 +81,7 @@ public class GameMgr : MonoBehaviour
                 }
                 #endregion
 
-                CurTurnPlayer.StartCalculator(CurTurnPlayer.YutStack[0]);
+                CurTurnPlayer.StartCalculator();
 
                 #region ÇÃ·¹ÀÌ¾î ¿òÁ÷ÀÓ
                 while (true)

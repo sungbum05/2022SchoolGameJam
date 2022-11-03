@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -660,6 +660,130 @@ Transform:
   m_Father: {fileID: 1531299510}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &77980293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 77980294}
+  - component: {fileID: 77980298}
+  - component: {fileID: 77980297}
+  - component: {fileID: 77980296}
+  - component: {fileID: 77980295}
+  m_Layer: 0
+  m_Name: OutPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &77980294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77980293}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.82, y: 8.3, z: -0.58}
+  m_LocalScale: {x: 0.2, y: 0.2000001, z: 0.10000005}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &77980295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77980293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7faafdecc78f2f14faef868b81f2cc6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PointNumber: 0
+  OnPlayer: {fileID: 0}
+  HideLine_1:
+    LineName: HideLine_3
+    Points:
+    - {fileID: 1225345621}
+    - {fileID: 726286127}
+  HideLine_2:
+    LineName: HideLine_4
+    Points:
+    - {fileID: 1980721214}
+    - {fileID: 1109690278}
+  IsOnPlayer: 0
+  IsGoToHide: 0
+  IsMiddlePoint: 0
+  IsEnd: 1
+--- !u!135 &77980296
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77980293}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &77980297
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77980293}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &77980298
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77980293}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &98739983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,7 +1134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -1078,7 +1202,7 @@ RectTransform:
   - {fileID: 1486993528}
   - {fileID: 1018432552}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1365,6 +1489,7 @@ MonoBehaviour:
     - {fileID: 726286127}
   MiddlePoint: {fileID: 1046957771}
   EndPoint: {fileID: 1439581263}
+  OutPoint: {fileID: 77980295}
 --- !u!114 &121821013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1499,7 +1624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -1619,7 +1744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: HideLine_2
     Points:
@@ -1670,7 +1795,7 @@ Transform:
   - {fileID: 1800557161}
   - {fileID: 1941779429}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &193863407
 MonoBehaviour:
@@ -1795,7 +1920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -2024,7 +2149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -2179,7 +2304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: HideLine_1
     Points:
@@ -2380,7 +2505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -2918,7 +3043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -3038,7 +3163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -3158,7 +3283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 3
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -3385,7 +3510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -3505,7 +3630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 2
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -3625,7 +3750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 1
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -3745,7 +3870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -3933,7 +4058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -4018,7 +4143,7 @@ Transform:
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &992536639
 GameObject:
@@ -4202,7 +4327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: HideLine_3
     Points:
@@ -4335,7 +4460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -4455,7 +4580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -4575,7 +4700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -4695,7 +4820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -4785,7 +4910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: HideLine_3
     Points:
@@ -5079,7 +5204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -5164,7 +5289,7 @@ Transform:
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1531299508
 GameObject:
@@ -5220,7 +5345,7 @@ Transform:
   - {fileID: 1990605467}
   - {fileID: 60772179}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1563948959
 GameObject:
@@ -5383,7 +5508,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1646393604
 GameObject:
@@ -5526,7 +5651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 4
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -5678,7 +5803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -5798,7 +5923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -6062,7 +6187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -6200,13 +6325,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsCanDraw: 0
+  IsDraw: 0
+  IsRotation: 0
   OriginalPos: {x: 0, y: 0, z: 0}
   OriginalRot: {x: 0, y: 0, z: 0, w: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 128
-  IsDraw: 0
-  IsRotation: 0
   RotationValue: 70
   RotationVec: {x: 0, y: 0, z: 0}
 --- !u!1 &1839669458
@@ -6336,13 +6461,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsCanDraw: 0
+  IsDraw: 0
+  IsRotation: 0
   OriginalPos: {x: 0, y: 0, z: 0}
   OriginalRot: {x: 0, y: 0, z: 0, w: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 128
-  IsDraw: 0
-  IsRotation: 0
   RotationValue: 70
   RotationVec: {x: 0, y: 0, z: 0}
 --- !u!1 &1896177828
@@ -6454,7 +6579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -6669,13 +6794,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsCanDraw: 0
+  IsDraw: 0
+  IsRotation: 0
   OriginalPos: {x: 0, y: 0, z: 0}
   OriginalRot: {x: 0, y: 0, z: 0, w: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 128
-  IsDraw: 0
-  IsRotation: 0
   RotationValue: 70
   RotationVec: {x: 0, y: 0, z: 0}
 --- !u!1 &1980721209
@@ -6787,7 +6912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -7034,7 +7159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -7233,7 +7358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -7353,7 +7478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PointNumber: 0
-  PlayerNum: 0
+  OnPlayer: {fileID: 0}
   HideLine_1:
     LineName: 
     Points: []
@@ -7479,13 +7604,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsCanDraw: 0
+  IsDraw: 0
+  IsRotation: 0
   OriginalPos: {x: 0, y: 0, z: 0}
   OriginalRot: {x: 0, y: 0, z: 0, w: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 128
-  IsDraw: 0
-  IsRotation: 0
   RotationValue: 70
   RotationVec: {x: 0, y: 0, z: 0}
 --- !u!4 &855966990636714423
@@ -7665,7 +7790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d4b1073f0741944b2ebf6d0ef31bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerType: 1
+  PlayerType: 0
   IsMyTurn: 0
   IsStart: 0
   IsEnd: 0
@@ -7864,7 +7989,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8416272007785994394}
   m_LocalRotation: {x: 0.000000030908623, y: 0.7071068, z: 0.7071067, w: 0.000000030908616}
-  m_LocalPosition: {x: 0.782564, y: 8.541, z: -0.486}
+  m_LocalPosition: {x: 0.82, y: 8.3, z: -0.58}
   m_LocalScale: {x: -69.60344, y: -47.69752, z: -1.1553047}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7892,7 +8017,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3655000508889569151}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.76, y: 8.541, z: -0.49400002}
+  m_LocalPosition: {x: 0.82, y: 8.3, z: -0.58}
   m_LocalScale: {x: 15.970039, y: 15.970037, z: 5.842097}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7906,7 +8031,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8513859188445378636}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.76, y: 8.541, z: -0.48900002}
+  m_LocalPosition: {x: 0.82, y: 8.3, z: -0.58}
   m_LocalScale: {x: 15.970039, y: 15.970037, z: 0.85942996}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8184,7 +8309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d4b1073f0741944b2ebf6d0ef31bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerType: 1
+  PlayerType: 0
   IsMyTurn: 0
   IsStart: 0
   IsEnd: 0

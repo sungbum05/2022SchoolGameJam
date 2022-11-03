@@ -30,6 +30,7 @@ public class Board : MonoBehaviour
     public List<LineClass> HideLine;
     public Point MiddlePoint;
     public Point EndPoint;
+    public Point OutPoint;
 
     private void Awake()
     {
