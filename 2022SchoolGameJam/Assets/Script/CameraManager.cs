@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine.Rendering.PostProcessing;
-using static UnityEngine.GraphicsBuffer;
-using UnityEditor;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
@@ -87,8 +84,9 @@ public class CameraManager : MonoBehaviour
 
                 if(Input.GetMouseButtonDown(0))
                 {
-                    CameraLights.DoFade(1, 0);
-                    CameraLights.DoFade(0, 1.0f);
+                    CameraLights.DOFade(1, 0);
+                    SoundManager.Instance.PlaySFX("Camera_Flash", 2.0f);
+                    CameraLights.DOFade(0, 1);
 
                     UIManager.Instance.OnGuideText($"{hit.transform.gameObject.GetComponent<Ghost>().Name} ∏ÿ√Á!");
                     hit.transform.gameObject.GetComponent<Ghost>().ResetCorutine();
