@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Rendering.PostProcessing;
+using static UnityEngine.GraphicsBuffer;
+using UnityEditor;
 
 public class CameraManager : MonoBehaviour
 {
@@ -38,6 +40,16 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField]
     Vector3 OriginalFreeRot;
+    [SerializeField]
+    Vector3 MoveFreeRot;
+
+    [SerializeField]
+    GameObject Target;
+    [SerializeField]
+    LayerMask LayerMask;
+
+    private float xRotate, yRotate, xRotateMove, yRotateMove;
+    public float rotateSpeed = 500.0f;
 
     private void Awake()
     {
@@ -55,6 +67,39 @@ public class CameraManager : MonoBehaviour
     private void Update()
     {
         ChangeCameraAngle();
+
+        if (idx == 2)
+        {
+            Target.SetActive(true);
+
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2));
+            Debug.DrawRay(ray.origin, ray.direction * 1000, Color.blue);
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 15.0f, LayerMask))
+            {
+                Debug.Log(hit.transform.gameObject.name);
+            }
+
+            if (Input.GetMouseButton(1)) // 클릭한 경우
+            {
+                xRotateMove = -Input.GetAxis("Mouse Y") * Time.deltaTime * rotateSpeed;
+                yRotateMove = Input.GetAxis("Mouse X") * Time.deltaTime * rotateSpeed;
+
+                yRotate = transform.eulerAngles.y + yRotateMove;
+                xRotate = xRotate + xRotateMove;
+
+                xRotate = Mathf.Clamp(xRotate, -90, 90); // 위, 아래 고정
+
+                transform.eulerAngles = new Vector3(xRotate, yRotate, 0);
+            }
+        }
+
+        else
+        {
+            Target.SetActive(false);
+        }
     }
 
     IEnumerator CameraFade(string Type)
