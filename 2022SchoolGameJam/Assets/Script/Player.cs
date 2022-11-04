@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum PlayerType
 {
@@ -36,6 +37,11 @@ public class Player : MonoBehaviour
 
     public GameObject MyTurnText;
 
+    public GameObject LastMalImgs;
+    public Image MyImg;
+
+    public Vector3 CatchOutPos;
+
     [SerializeField]
     List<Point> CurLine;
     [SerializeField]
@@ -51,6 +57,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         BasicSetting();
+        CatchOutPos = this.transform.position;
     }
 
     private void Update()
@@ -82,7 +89,7 @@ public class Player : MonoBehaviour
         LineIdx = 0;
 
         CurPoint = null;
-        this.transform.position = Board.Instance.OutPoint.transform.position;
+        this.transform.position = CatchOutPos;
     }
 
     public void UpdateSetting()
@@ -175,7 +182,13 @@ public class Player : MonoBehaviour
 
                 ResetPlayer();
 
+                MyImg.color = Color.white;
+
+                MyTurnText.SetActive(false);
+                LastMalImgs.SetActive(true);
+
                 GameMgr.Instance.IsPlayerMove = true;
+
                 yield break;
             }
 
@@ -209,6 +222,8 @@ public class Player : MonoBehaviour
         }
 
         MyTurnText.SetActive(false);
+        LastMalImgs.SetActive(true);
+
         GameMgr.Instance.IsPlayerMove = true;
 
         yield break;
