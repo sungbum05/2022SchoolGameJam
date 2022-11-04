@@ -36,6 +36,7 @@ public class GameMgr : MonoBehaviour
             CurTurnPlayer = PlayerList[i];
 
             CurTurnPlayer.MyTurnText.SetActive(true);
+            CurTurnPlayer.LastMalImgs.SetActive(false);
 
             if (CurTurnPlayer.IsEnd == false)
             {
