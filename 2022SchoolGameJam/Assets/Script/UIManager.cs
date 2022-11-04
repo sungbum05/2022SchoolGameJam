@@ -94,8 +94,11 @@ public class UIManager : MonoBehaviour
 
     public void OnExit()
     {
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-        Application.Quit();
+#else
+        Application.Quit(); // 어플리케이션 종료
+#endif
     }
 
     public void OnGuideText(string Content)
