@@ -187,6 +187,12 @@ public class Player : MonoBehaviour
                 MyTurnText.SetActive(false);
                 LastMalImgs.SetActive(true);
 
+                if (PlayerType == PlayerType.Human)
+                    UIManager.Instance.OnWinPan();
+
+                else
+                    UIManager.Instance.OnLosePan();
+
                 GameMgr.Instance.IsPlayerMove = true;
 
                 yield break;

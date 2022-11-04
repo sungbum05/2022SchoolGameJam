@@ -35,11 +35,11 @@ public class GameMgr : MonoBehaviour
             PlayerList[i].IsMyTurn = true;
             CurTurnPlayer = PlayerList[i];
 
-            CurTurnPlayer.MyTurnText.SetActive(true);
-            CurTurnPlayer.LastMalImgs.SetActive(false);
-
             if (CurTurnPlayer.IsEnd == false)
             {
+                CurTurnPlayer.MyTurnText.SetActive(true);
+                CurTurnPlayer.LastMalImgs.SetActive(false);
+
                 CurTurnPlayer.UpdateSetting();
 
                 #region ภท ด๘มü

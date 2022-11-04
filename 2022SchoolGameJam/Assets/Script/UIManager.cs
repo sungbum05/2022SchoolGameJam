@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 using UnityEngine.UI;
 
@@ -19,6 +20,8 @@ public class UIManager : MonoBehaviour
     public GameObject explain;
 
     public GameObject gameTitle;
+    public Text EndingText;
+    public GameObject GameEndingPan;
 
     public GameObject PlayerIcons;
     public Text GuideText;
@@ -40,10 +43,25 @@ public class UIManager : MonoBehaviour
         OnGuideText("게임 시작!");
     }
 
+    public void OnWinPan()
+    {
+        EndingText.text = "승리하셨습니다!";
+        GameEndingPan.SetActive(true);
+    }
+
+    public void OnLosePan()
+    {
+        EndingText.text = "패배하셨습니다..";
+        GameEndingPan.SetActive(true);
+    }
+
+    public void OnRestart()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void ClickSound()
     {
-        
-
         switch(soundManager.masterVolume)
             {
                 case 0:
