@@ -1081,6 +1081,8 @@ MonoBehaviour:
   GameEndingPan: {fileID: 884004450}
   PlayerIcons: {fileID: 1018432551}
   GuideText: {fileID: 1787500579}
+  Ghost1: {fileID: 1529292744}
+  Ghost2: {fileID: 1593495116}
 --- !u!224 &112097529
 RectTransform:
   m_ObjectHideFlags: 0

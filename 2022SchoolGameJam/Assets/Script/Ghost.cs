@@ -26,8 +26,6 @@ public class Ghost : MonoBehaviour
     {
         OriginalPos = this.transform.position;
         StartCoroutine(GhostMove());
-
-        ResetCorutine();
     }
 
     public void ResetCorutine()

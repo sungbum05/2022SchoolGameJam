@@ -26,6 +26,9 @@ public class UIManager : MonoBehaviour
     public GameObject PlayerIcons;
     public Text GuideText;
 
+    public Ghost Ghost1;
+    public Ghost Ghost2;
+
     private void Awake()
     {
         Instance = this;
@@ -38,6 +41,9 @@ public class UIManager : MonoBehaviour
         soundManager.PlayBGM(soundManager.masterVolume);
         StartCoroutine(soundManager.bellBgm());
         GameMgr.Instance.StartGame();
+
+        Ghost1.ResetCorutine();
+        Ghost2.ResetCorutine();
 
         PlayerIcons.SetActive(true);
         OnGuideText("게임 시작!");
