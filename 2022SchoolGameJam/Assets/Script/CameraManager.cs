@@ -1,10 +1,12 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Rendering.PostProcessing;
 using static UnityEngine.GraphicsBuffer;
 using UnityEditor;
+using Microsoft.Unity.VisualStudio.Editor;
+using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
@@ -44,6 +46,8 @@ public class CameraManager : MonoBehaviour
     Vector3 MoveFreeRot;
 
     [SerializeField]
+    Image CameraLights;
+    [SerializeField]
     GameObject Target;
     [SerializeField]
     LayerMask LayerMask;
@@ -79,7 +83,16 @@ public class CameraManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 15.0f, LayerMask))
             {
-                Debug.Log(hit.transform.gameObject.name);
+                Debug.Log(hit.transform.gameObject.GetComponent<Ghost>().Name);
+
+                if(Input.GetMouseButtonDown(0))
+                {
+                    CameraLights.DoFade(1, 0);
+                    CameraLights.DoFade(0, 1.0f);
+
+                    UIManager.Instance.OnGuideText($"{hit.transform.gameObject.GetComponent<Ghost>().Name} ¸ØÃç!");
+                    hit.transform.gameObject.GetComponent<Ghost>().ResetCorutine();
+                }
             }
 
             if (Input.GetMouseButton(1)) // Å¬¸¯ÇÑ °æ¿ì

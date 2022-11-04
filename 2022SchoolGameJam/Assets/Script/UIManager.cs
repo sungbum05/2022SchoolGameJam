@@ -83,6 +83,7 @@ public class UIManager : MonoBehaviour
     public void OnGuideText(string Content)
     {
         GuideText.text = Content;
+        GuideText.DOFade(1, 0);
 
         GuideText.gameObject.SetActive(true);
         StartCoroutine(FadeGuideText());
